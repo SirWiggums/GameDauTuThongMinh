@@ -1,3 +1,11 @@
+@media screen and (max-width: 600px) {
+    div {
+      margin-bottom: 20px;
+    }
+  }
+  
+
+
 #wallet {
     position: fixed;
     top: 10px;
@@ -45,7 +53,7 @@
 }
 #total-score{
     position: absolute;
-    top: 4%;
+    top: 500px;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 2px solid #333;
@@ -55,7 +63,7 @@
 }
 #result {
     position: absolute;
-    top: 10%;
+    top: 600px;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 2px solid #333;
