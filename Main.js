@@ -49,7 +49,7 @@ document.getElementById('rollButton').addEventListener('click', function() {
             }, 0);
 
             setTimeout(function() {
-                if ((sum >= 4 && sum <= 9 && playerChoice === 'X') || (sum >= 12 && sum <= 16 && playerChoice === 'T')) {
+                if ((sum >= 3 && sum <= 10 && playerChoice === 'X') || (sum >= 11 && sum <= 18 && playerChoice === 'T')) {
                     wallet += totalBetAmount * 2;
                     alert('Bạn đã thắng! Số xu hiện tại: ' + wallet);
                 } else {
