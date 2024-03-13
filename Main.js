@@ -33,23 +33,34 @@ document.getElementById('rollButton').addEventListener('click', function() {
         return;
     }
 
-    var sum = 0;
     var dices = document.getElementsByClassName('dice');
-    for (var i = 0; i < dices.length; i++) {
-        var diceValue = Math.floor(Math.random() * 6);
-        dices[i].textContent = diceFaces[diceValue];
-        sum += diceValue + 1;
-    }
+    var rollCount = 0;
+    var rolls = 10; // Số lần lăn xúc xắc
+    var intervalId = setInterval(function() {
+        for (var i = 0; i < dices.length; i++) {
+            var diceValue = Math.floor(Math.random() * 6);
+            dices[i].textContent = diceFaces[diceValue];
+        }
+        rollCount++;
+        if (rollCount >= rolls) {
+            clearInterval(intervalId);
+            var sum = Array.from(dices).reduce(function(acc, dice) {
+                return acc + parseInt(dice.textContent.charCodeAt(0)) - 9856; // 9856 là mã Unicode cho ⚀
+            }, 0);
 
-    if ((sum >= 4 && sum <= 9 && playerChoice === 'X') || (sum >= 12 && sum <= 16 && playerChoice === 'T')) {
-        wallet += totalBetAmount * 2;
-        alert('Bạn đã thắng! Số xu hiện tại: ' + wallet);
-    } else {
-        alert('Bạn đã thua. Số xu hiện tại: ' + wallet);
-    }
+            setTimeout(function() {
+                if ((sum >= 4 && sum <= 9 && playerChoice === 'X') || (sum >= 12 && sum <= 16 && playerChoice === 'T')) {
+                    wallet += totalBetAmount * 2;
+                    alert('Bạn đã thắng! Số xu hiện tại: ' + wallet);
+                } else {
+                    alert('Bạn đã thua. Số xu hiện tại: ' + wallet);
+                }
 
-    totalBetAmount = 0;
-    updateDisplay();
+                totalBetAmount = 0;
+                updateDisplay();
+            }, 1000); // Độ trễ 1 giây (1000 milliseconds) cho thông báo kết quả
+        }
+    }, 100); // Độ trễ giữa các lần lăn là 100 milliseconds
 });
 
 // var wallet = 500;
