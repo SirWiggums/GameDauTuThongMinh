@@ -51,14 +51,17 @@ document.getElementById('rollButton').addEventListener('click', function() {
             clearInterval(intervalId);
             // Đặt độ trễ cho thông báo tổng điểm
             setTimeout(function() {
-                alert('Tổng điểm: ' + sum); // Hiển thị tổng điểm sau khi lăn xúc xắc
+                document.getElementById('total-score').textContent = 'Tổng điểm: ' + sum;
                 // Đặt độ trễ cho thông báo kết quả thắng thua
                 setTimeout(function() {
+                    var resultDiv = document.getElementById('result');
                     if ((sum >= 3 && sum <= 10 && playerChoice === 'X') || (sum >= 11 && sum <= 18 && playerChoice === 'T')) {
                         wallet += totalBetAmount * 2;
-                        alert('Bạn đã thắng! Số xu hiện tại: ' + wallet);
+                        document.getElementById('result').textContent = 'Bạn đã thắng! +' + totalBetAmount;
+                        resultDiv.style.backgroundColor = 'green';
                     } else {
-                        alert('Bạn đã thua. Số xu hiện tại: ' + wallet);
+                        document.getElementById('result').textContent = 'Bạn đã thua. -' + totalBetAmount;
+                        resultDiv.style.backgroundColor = 'red';
                     }
                     totalBetAmount = 0;
                     updateDisplay();

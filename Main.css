@@ -43,3 +43,23 @@
     width: 100px;
     margin: 10px auto;
 }
+#total-score{
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+}
+#result {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+}
