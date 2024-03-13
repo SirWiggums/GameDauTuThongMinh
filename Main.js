@@ -36,32 +36,38 @@ document.getElementById('rollButton').addEventListener('click', function() {
     var dices = document.getElementsByClassName('dice');
     var rollCount = 0;
     var rolls = 10; // Số lần lăn xúc xắc
+    var sum = 0; // Tổng điểm của xúc xắc
+
     var intervalId = setInterval(function() {
         for (var i = 0; i < dices.length; i++) {
             var diceValue = Math.floor(Math.random() * 6);
             dices[i].textContent = diceFaces[diceValue];
+            if (rollCount === rolls - 1) { // Chỉ cộng điểm ở lần lăn cuối cùng
+                sum += diceValue + 1;
+            }
         }
         rollCount++;
         if (rollCount >= rolls) {
             clearInterval(intervalId);
-            var sum = Array.from(dices).reduce(function(acc, dice) {
-                return acc + parseInt(dice.textContent.charCodeAt(0)) - 9856; // 9856 là mã Unicode cho ⚀
-            }, 0);
-
+            // Đặt độ trễ cho thông báo tổng điểm
             setTimeout(function() {
-                if ((sum >= 3 && sum <= 10 && playerChoice === 'X') || (sum >= 11 && sum <= 18 && playerChoice === 'T')) {
-                    wallet += totalBetAmount * 2;
-                    alert('Bạn đã thắng! Số xu hiện tại: ' + wallet);
-                } else {
-                    alert('Bạn đã thua. Số xu hiện tại: ' + wallet);
-                }
-
-                totalBetAmount = 0;
-                updateDisplay();
-            }, 1000); // Độ trễ 1 giây (1000 milliseconds) cho thông báo kết quả
+                alert('Tổng điểm: ' + sum); // Hiển thị tổng điểm sau khi lăn xúc xắc
+                // Đặt độ trễ cho thông báo kết quả thắng thua
+                setTimeout(function() {
+                    if ((sum >= 3 && sum <= 10 && playerChoice === 'X') || (sum >= 11 && sum <= 18 && playerChoice === 'T')) {
+                        wallet += totalBetAmount * 2;
+                        alert('Bạn đã thắng! Số xu hiện tại: ' + wallet);
+                    } else {
+                        alert('Bạn đã thua. Số xu hiện tại: ' + wallet);
+                    }
+                    totalBetAmount = 0;
+                    updateDisplay();
+                }, 500); // Độ trễ 0.5 giây cho thông báo kết quả thắng thua
+            }, 100); // Độ trễ 0.1 giây cho thông báo tổng điểm
         }
     }, 100); // Độ trễ giữa các lần lăn là 100 milliseconds
 });
+
 
 // var wallet = 500;
 //         var totalBetAmount = 0;
